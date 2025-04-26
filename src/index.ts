@@ -1,5 +1,5 @@
 import type { Bit, BitTuple, BitTupleOr } from "./bit";
-import type { CheckNextPlace, IsWin, Play, Playboard } from "./playboard";
+import type { CheckNextPlace, IsWin, Play, Playboard, Player1 } from "./playboard";
 
 // 勝敗判定
 type CheckWin<CurrentPlayboard extends Playboard> = IsWin<
@@ -51,7 +51,7 @@ type Run<
 	CurrentPlayboard extends Playboard = {
 		player1: BitTuple<9, -1>;
 		player2: BitTuple<9, -1>;
-		nextPlayer: "P1";
+		nextPlayer: Player1;
 	},
 > = CheckNextPlace<CurrentPlayboard, Next> extends true
 	? CheckWin<Play<CurrentPlayboard, Next>>
@@ -75,7 +75,7 @@ type ComputeOXToBit<
 type TicTacToe<T extends OX[]> = CheckWin<{
 	player1: OXToBit<T, "O">;
 	player2: OXToBit<T, "X">;
-	nextPlayer: "P1";
+	nextPlayer: Player1;
 }>;
 
 export type { Run, FormatPlayboard, TicTacToe };

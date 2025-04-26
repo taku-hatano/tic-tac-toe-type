@@ -61,6 +61,13 @@ test("○×ゲームで遊ぶ - 引き分けパターン", () => {
 	expectTypeOf<P9>().toEqualTypeOf<"Draw!">();
 });
 
+test("○×ゲームで遊ぶ - 既に埋まっているマスに置こうとした場合", () => {
+	type P1 = Run<0>;
+	expectTypeOf<FormatPlayboard<P1>>().toEqualTypeOf<"O-- / --- / ---">();
+	type P2 = Run<0, P1>;
+	expectTypeOf<P2>().toEqualTypeOf<"Hey! Player2!! Invalid Move!">();
+});
+
 test("TicTacToe - Visualize Mode", () => {
 	expectTypeOf<
 		TicTacToe<[

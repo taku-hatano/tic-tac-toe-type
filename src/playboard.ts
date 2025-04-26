@@ -1,7 +1,7 @@
 import type { Bit, BitIndexOf, BitTuple, BitTupleOr } from "./bit";
 
-type Player1 = "P1";
-type Player2 = "P2";
+type Player1 = "Player1";
+type Player2 = "Player2";
 type Player = Player1 | Player2;
 type ChangePlayer<T extends Player> = T extends Player1 ? Player2 : Player1;
 
@@ -61,4 +61,6 @@ export type {
 	CheckNextPlace,
 	Play,
 	IsWin,
+	Player1,
+	Player2,
 };
