@@ -52,7 +52,7 @@ type ComputeFormatPlayboard<
 		>;
 
 // ゲーム実行
-type Run<
+type TicTacToe<
 	Next extends number,
 	CurrentPlayboard extends Playboard = {
 		player1: BitTuple<9, -1>;
@@ -78,10 +78,10 @@ type ComputeOXToBit<
 			Target,
 			[...Result, T[Result["length"]] extends Target ? 1 : 0]
 		>;
-type TicTacToe<T extends OX[]> = CheckWin<{
+type TicTacToeView<T extends OX[]> = CheckWin<{
 	player1: OXToBit<T, "O">;
 	player2: OXToBit<T, "X">;
 	nextPlayer: Player1;
 }>;
 
-export type { Run, FormatPlayboard, TicTacToe };
+export type { TicTacToe, FormatPlayboard, TicTacToeView };
