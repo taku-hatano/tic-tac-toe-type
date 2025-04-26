@@ -70,10 +70,6 @@ test("○×ゲームで遊ぶ - 既に埋まっているマスに置こうとし
 
 test("TicTacToe - Visualize Mode", () => {
 	expectTypeOf<
-		TicTacToe<[
-			"X", "X", "-",
-			"O", "O", "O",
-			"-", "-", "-"
-		]>
+		TicTacToe<["X", "X", "-", "O", "O", "O", "-", "-", "-"]>
 	>().toEqualTypeOf<"Winner is Player1!">();
 });

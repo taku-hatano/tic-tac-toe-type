@@ -1,4 +1,4 @@
-import type { Bit, BitIndexOf, BitTuple, BitTupleOr } from "./bit";
+import type { Bit, BitIndexOf, BitTuple, BitTupleAnd, BitTupleOr } from "./bit";
 
 type Player1 = "Player1";
 type Player2 = "Player2";
@@ -31,28 +31,42 @@ type Play<CurrentPlayboard extends Playboard, Next extends number> = {
 	nextPlayer: ChangePlayer<CurrentPlayboard["nextPlayer"]>;
 };
 
-type IsWin<T extends Bit[]> =
+type Mark0 = BitTuple<9, 0>;
+type Mark1 = BitTuple<9, 1>;
+type Mark2 = BitTuple<9, 2>;
+type Mark3 = BitTuple<9, 3>;
+type Mark4 = BitTuple<9, 4>;
+type Mark5 = BitTuple<9, 5>;
+type Mark6 = BitTuple<9, 6>;
+type Mark7 = BitTuple<9, 7>;
+type Mark8 = BitTuple<9, 8>;
+
+type WinnerCondition = [
 	// 横一列
-	0 | 1 | 2 extends BitIndexOf<T, 1>
+	BitTupleOr<BitTupleOr<Mark0, Mark1>, Mark2>,
+	BitTupleOr<BitTupleOr<Mark3, Mark4>, Mark5>,
+	BitTupleOr<BitTupleOr<Mark6, Mark7>, Mark8>,
+	// 縦一列
+	BitTupleOr<BitTupleOr<Mark0, Mark3>, Mark6>,
+	BitTupleOr<BitTupleOr<Mark1, Mark4>, Mark7>,
+	BitTupleOr<BitTupleOr<Mark2, Mark5>, Mark8>,
+	// 斜め一列
+	BitTupleOr<BitTupleOr<Mark0, Mark4>, Mark8>,
+	BitTupleOr<BitTupleOr<Mark2, Mark4>, Mark6>,
+];
+
+type IsWin<T extends Bit[]> = ComputeIsWin<T, []>;
+type ComputeIsWin<
+	T extends Bit[],
+	Current extends number[],
+> = Current["length"] extends WinnerCondition["length"]
+	? false
+	: BitTupleAnd<
+				T,
+				WinnerCondition[Current["length"]]
+			> extends WinnerCondition[Current["length"]]
 		? true
-		: 3 | 4 | 5 extends BitIndexOf<T, 1>
-			? true
-			: 6 | 7 | 8 extends BitIndexOf<T, 1>
-				? true
-				: // 縦一列
-					0 | 3 | 6 extends BitIndexOf<T, 1>
-					? true
-					: 1 | 4 | 7 extends BitIndexOf<T, 1>
-						? true
-						: 2 | 5 | 8 extends BitIndexOf<T, 1>
-							? true
-							: // 斜め一列
-								0 | 4 | 8 extends BitIndexOf<T, 1>
-								? true
-								: 2 | 4 | 6 extends BitIndexOf<T, 1>
-									? true
-									: // それ以外
-										false;
+		: ComputeIsWin<T, [...Current, 0]>;
 
 export type {
 	Playboard,

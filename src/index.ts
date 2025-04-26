@@ -1,5 +1,11 @@
 import type { Bit, BitTuple, BitTupleOr } from "./bit";
-import type { CheckNextPlace, IsWin, Play, Playboard, Player1 } from "./playboard";
+import type {
+	CheckNextPlace,
+	IsWin,
+	Play,
+	Playboard,
+	Player1,
+} from "./playboard";
 
 // 勝敗判定
 type CheckWin<CurrentPlayboard extends Playboard> = IsWin<

@@ -76,18 +76,18 @@ test("盤面を進める", () => {
 
 test("勝敗を判定する", () => {
 	// 横一列
-	expectTypeOf<IsWin<[1, 1, 1, 0, 0, 0, 0, 0, 0]>>().toEqualTypeOf<true>();
-	expectTypeOf<IsWin<[0, 0, 0, 1, 1, 1, 0, 0, 0]>>().toEqualTypeOf<true>();
-	expectTypeOf<IsWin<[0, 0, 0, 0, 0, 0, 1, 1, 1]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[1, 1, 1, 1, 0, 0, 0, 0, 0]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[0, 1, 0, 1, 1, 1, 0, 0, 0]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[0, 0, 1, 0, 0, 0, 1, 1, 1]>>().toEqualTypeOf<true>();
 
 	// 縦一列
-	expectTypeOf<IsWin<[1, 0, 0, 1, 0, 0, 1, 0, 0]>>().toEqualTypeOf<true>();
-	expectTypeOf<IsWin<[0, 1, 0, 0, 1, 0, 0, 1, 0]>>().toEqualTypeOf<true>();
-	expectTypeOf<IsWin<[0, 0, 1, 0, 0, 1, 0, 0, 1]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[1, 0, 1, 1, 0, 0, 1, 0, 0]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[0, 1, 0, 1, 1, 0, 0, 1, 0]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[0, 0, 1, 0, 1, 1, 0, 0, 1]>>().toEqualTypeOf<true>();
 
 	// 斜め一列
-	expectTypeOf<IsWin<[1, 0, 0, 0, 1, 0, 0, 0, 1]>>().toEqualTypeOf<true>();
-	expectTypeOf<IsWin<[0, 0, 1, 0, 1, 0, 1, 0, 0]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[1, 0, 1, 0, 1, 0, 0, 0, 1]>>().toEqualTypeOf<true>();
+	expectTypeOf<IsWin<[0, 0, 1, 0, 1, 1, 1, 0, 0]>>().toEqualTypeOf<true>();
 
 	// それ以外
 	expectTypeOf<IsWin<[0, 0, 0, 0, 0, 0, 0, 0, 0]>>().toEqualTypeOf<false>();
