@@ -7,10 +7,10 @@
 type Bit = 0 | 1;
 
 // ビット論理和
-type Or<L extends Bit, R extends Bit> = `${L}${R}` extends `00` ? 0 : 1;
+type Or<L extends Bit, R extends Bit> = 1 extends L | R ? 1 : 0;
 
 // ビット論理積
-type And<L extends Bit, R extends Bit> = `${L}${R}` extends `11` ? 1 : 0;
+type And<L extends Bit, R extends Bit> = 1 extends L & R ? 1 : 0;
 
 // ビット否定
 type Not<T extends Bit> = {
